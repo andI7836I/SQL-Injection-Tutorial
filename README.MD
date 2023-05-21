@@ -100,7 +100,7 @@ Upon executing the query, you will retrieve the answer "thisisapass232".
 
 ---
 
-## Task 6:
+## Task 6: Exploiting SQL Injection
 ![1sql](src/sql6.png)
 
 1. Visit a website that converts text to hex format and convert the word "god" to hex.
@@ -113,7 +113,28 @@ By following these steps, you can bypass the filtering and retrieve the password
 
 Upon executing the query, you will retrieve the answer "ivarywantlevel7".
 
+---
 
+## Task 7:
+![1sql](src/sql7.png)
+
+1. Convert the word "gentoo" to its hexadecimal representation using an online tool or website. Let's assume it becomes "67656E746F6F" in hexadecimal.
+
+2. Craft the following SQL injection command:
+
+```
+-1/**/OR/**/login/**/like/**/0x2567656E746F6F25#
+```
+* The /**/ sequence represents a space. It's used to bypass filters that may be in place to block spaces in the input.
+* The "LIKE" keyword is used to perform a pattern match comparison. In this case, we want to match the login column with a specific pattern.
+* The "0x2567656E746F6F25" is the hexadecimal representation of the string "gentoo". By using hexadecimal representation, we bypass the filtering of certain characters like single quotes ('), which are commonly used for string literals in SQL.
+
+Upon executing the query, you will retrieve the answer "level8please".
+
+---
+
+## Task 8:
+![1sql](src/sql8.png)
 
 
 ---

@@ -35,8 +35,56 @@ Learn about best practices and techniques for detecting and preventing SQL injec
 
 This section will provide practical examples of SQL injection attacks. We'll present vulnerable code snippets and demonstrate how an attacker can exploit them. It's important to note that these examples should only be used for educational purposes and must not be deployed in a production environment.
 
-1. 
-![1sql](src/sql.png)
+## Task 1: Retrieve Password for User with ID 12
+![1sql](src/sql1.png)
+
+To accomplish this, you need to execute the following SQL query against the database:
+
+```
+SELECT pass FROM users WHERE id = 12;
+```
+Upon executing the query, you will retrieve the password for the user with id=12, which is "QwErTy".
+
+---
+## Task 2: Retrieve Password for User with ID 9
+![1sql](src/sql2.png)
+
+To retrieve the password, you need to input a specific value that exploits the SQL injection vulnerability. Use the following command:
+
+```
+' or '1'='1
+```
+Upon executing the query, you will retrieve the password for the user with id=12, which is "secreto".
+In SQL, the condition 1=1 is always true, so this modification effectively bypasses the original WHERE clause and retrieves all records from the users table.
+
+---
+## Task 3: Retrieve Password for User with ID 13
+![1sql](src/sql3.png)
+
+To retrieve the password, you can use the following command:
+```
+' or 1=1#
+```
+`OR 1=1` is used to make the first part of the query true, which allows bypassing the login condition.
+
+`#` is used to comment out the rest of the query to prevent any syntax errors.
+Upon executing the query, you will retrieve the password for the user with id=13, which is "iwanttogo4".
+
+---
+
+## Task 4: Extracting Password Using UNION
+![1sql](src/sql4.png)
+
+The goal is to retrieve data from the `secret` table where the field `ggg` is set to `'abc'` by using a UNION command. The initial SQL query given is:
+```
+' or 1=1 UNION SELECT * FROM secret WHERE ggg='abc'#
+```
+
+This modified query will perform a UNION operation between the users table and the secret table, allowing you to retrieve the data from the secret table where ggg='abc'.
+
+---
+
+Upon executing the query, you will retrieve the answer "super-secret-data".
 
 ## Additional Resources
 

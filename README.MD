@@ -82,9 +82,41 @@ The goal is to retrieve data from the `secret` table where the field `ggg` is se
 
 This modified query will perform a UNION operation between the users table and the secret table, allowing you to retrieve the data from the secret table where ggg='abc'.
 
+Upon executing the query, you will retrieve the answer "super-secret-data".
+
 ---
 
-Upon executing the query, you will retrieve the answer "super-secret-data".
+## Task 5: Retrieving Password using UNION
+![1sql](src/sql5.png)
+
+To retrieve the password from the `secret` table using the UNION command, you can modify the query as follows:
+```
+' or 1=1 UNION SELECT *,1 FROM secret #
+```
+
+By injecting the UNION command and selecting the appropriate columns (1), you can fetch the `pass` field from the `secret` table.
+
+Upon executing the query, you will retrieve the answer "thisisapass232".
+
+---
+
+## Task 6:
+![1sql](src/sql6.png)
+
+1. Visit a website that converts text to hex format and convert the word "god" to hex.
+2. Use the following SQL injection command:
+```
+-1 OR login=0x676F64#
+```
+
+By following these steps, you can bypass the filtering and retrieve the password for the user with the login 'god'.
+
+Upon executing the query, you will retrieve the answer "ivarywantlevel7".
+
+
+
+
+---
 
 ## Additional Resources
 
